@@ -1,21 +1,37 @@
 console.log("Welcome to User Registration Problem");
-const input = require('prompt-sync')();
+const prompt = require('prompt-sync')();
 
-let regexToCheck = new RegExp("^[A-Z]{1}[A-Za-z]{2}");
+let namePattern = new RegExp("^[A-Z]{1}[A-Za-z]{2}");
+let emailPattern = new RegExp("^[a-zA-Z0-9.+_-]+[@][a-zA-Z0-9]+[.]co(m|.in)$");
 
-const firstName = input("Enter First Name: ");
-
-function checkRegex(inputString) {
-	return regexToCheck.test(inputString);
+function checkFormat(input, inputFormat){
+    return inputFormat.test(input);
 }
 
-if (checkRegex(firstName)) {
-const lastName = input("Enter Last Name: ");
-	if (checkRegex(lastName)) 
-			console.log("Valid name");
-	else
-			console.log("Invalid last name");
+function getFirstName(){
+    let firstName = prompt("Enter First Name: ");
+    if(!checkFormat(firstName, namePattern)){
+        console.log("Enter Valid First Name");
+        getFirstName();
+    }
 }
-else {
-	console.log("Invalid first name");
+
+function getLastName(){
+    let lastName = prompt("Enter Last Name: ");
+    if(!checkFormat(lastName, namePattern)){
+        console.log("Enter Valid Last Name");
+        getLastName();
+    }
 }
+
+function getEmail(){
+    let email = prompt("Enter Email: ");
+    if(!checkFormat(email, emailPattern)){
+        console.log("Enter Valid Email");
+        getEmail();
+    }
+}
+
+getFirstName();
+getLastName();
+getEmail();
