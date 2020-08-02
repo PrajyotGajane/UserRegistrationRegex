@@ -4,7 +4,7 @@ const prompt = require('prompt-sync')();
 let namePattern = new RegExp("^[A-Z]{1}[A-Za-z]{2}");
 let emailPattern = new RegExp("^[a-zA-Z0-9.+_-]+[@][a-zA-Z0-9]+[.]co(m|.in)$");
 let mobilePattern = new RegExp("^[0-9][0-9] [0-9]{10}$");
-
+let passwordPattern = new RegExp("^.{8,}$");
 function checkFormat(input, inputFormat){
     return inputFormat.test(input);
 }
@@ -33,7 +33,7 @@ function getEmail(){
     }
 }
 
-function readMobileNumber(){
+function getMobileNumber(){
     let phone = prompt("Enter Phone Number: ");
     if(!checkFormat(phone, mobilePattern)){
         console.log("Enter Valid Phone Number");
@@ -41,7 +41,15 @@ function readMobileNumber(){
     }
 }
 
+function getPassword(){
+    password = prompt("Enter Password: ");
+    if(!checkFormat(password, passwordPattern)){
+        console.log("Enter Valid Password");
+        getPassword();
+    }
+}
 getFirstName();
 getLastName();
 getEmail();
-readMobileNumber();
+getMobileNumber();
+getPassword();
